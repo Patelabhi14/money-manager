@@ -1,0 +1,51 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-title> Money Manager </ion-title>
+	</ion-toolbar>
+
+	<ion-item lines="none">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div>
+						<ion-label> Earning </ion-label>
+						<p>15000</p>
+					</div>
+				</ion-col>
+				<ion-col>
+					<div>
+						<ion-label> Expense </ion-label>
+						<p>500</p>
+					</div>
+				</ion-col>
+				<ion-col>
+					<div>
+						<ion-label> Total </ion-label>
+						<p>14500</p>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-item>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ng-template #template let-view="view" let-row="row" let-col="col">
+		<div class="calendar" (click)="onDateSelect(view.dates[row*7+col])">
+			<p class="date">{{view.dates[row*7+col].label}}</p>
+		</div>
+	</ng-template>
+
+	<calendar
+		[calendarMode]="calendar.mode"
+		[currentDate]="calendar.currentDate"
+		[monthviewDisplayEventTemplate]="template"
+	>
+	</calendar>
+
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button color="danger" (click)="createNewBudget()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+</ion-content>

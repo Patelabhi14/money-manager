@@ -1,0 +1,36 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/budget"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Create New Budget</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<form>
+		<ion-list class="ion-padding">
+			<ion-item>
+				<ion-label position="floating">Amount</ion-label>
+				<ion-input type="number"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label position="floating">Title</ion-label>
+				<ion-input type="text"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label>Category</ion-label>
+				<ion-select interface="action-sheet">
+					<ion-select-option value="enable">Enable</ion-select-option>
+					<ion-select-option value="mute">Mute</ion-select-option>
+					<ion-select-option value="mute_week"
+						>Mute for a week</ion-select-option
+					>
+					<ion-select-option value="mute_year"
+						>Mute for a year</ion-select-option
+					>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+	</form>
+</ion-content>

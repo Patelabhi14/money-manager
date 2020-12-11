@@ -2,21 +2,53 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+	{
+		path: 'budget',
+		children: [
+			{
+				path: '',
+				loadChildren: () =>
+					import('./budget/budget.module').then((m) => m.BudgetPageModule),
+			},
+			{
+				path: 'new',
+				loadChildren: () =>
+					import('./budget/new-budget/new-budget.module').then(
+						(m) => m.NewBudgetPageModule
+					),
+			},
+			{
+				path: ':date',
+				children: [
+					{
+						path: '',
+						loadChildren: () =>
+							import('./budget/budget-detail/budget-detail.module').then(
+								(m) => m.BudgetDetailPageModule
+							),
+					},
+					{
+						path: 'edit/:id',
+						loadChildren: () =>
+							import(
+								'./budget/budget-detail/edit-budget/edit-budget.module'
+							).then((m) => m.EditBudgetPageModule),
+					},
+				],
+			},
+		],
+	},
+	{
+		path: '',
+		redirectTo: 'budget',
+		pathMatch: 'full',
+	},
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+	imports: [
+		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+	],
+	exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
