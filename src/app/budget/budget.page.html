@@ -7,21 +7,21 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<div>
+					<div class="header earning">
 						<ion-label> Earning </ion-label>
-						<p>15000</p>
+						<p>{{earning}}</p>
 					</div>
 				</ion-col>
 				<ion-col>
-					<div>
+					<div class="header expense">
 						<ion-label> Expense </ion-label>
-						<p>500</p>
+						<p>{{expense}}</p>
 					</div>
 				</ion-col>
 				<ion-col>
-					<div>
+					<div class="header">
 						<ion-label> Total </ion-label>
-						<p>14500</p>
+						<p>{{total}}</p>
 					</div>
 				</ion-col>
 			</ion-row>
@@ -33,6 +33,16 @@
 	<ng-template #template let-view="view" let-row="row" let-col="col">
 		<div class="calendar" (click)="onDateSelect(view.dates[row*7+col])">
 			<p class="date">{{view.dates[row*7+col].label}}</p>
+			<div *ngFor="let e of entries">
+				<p
+					*ngIf="e.date.toDateString() === view.dates[row*7+col].date.toDateString()"
+					class="entries"
+					[class.earning]="e.type === 'Earning'"
+					[class.expense]="e.type === 'Expense'"
+				>
+					{{e.amount}}
+				</p>
+			</div>
 		</div>
 	</ng-template>
 
@@ -44,7 +54,7 @@
 	</calendar>
 
 	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-		<ion-fab-button color="danger" (click)="createNewBudget()">
+		<ion-fab-button color="dark" (click)="createNewBudget()">
 			<ion-icon name="add"></ion-icon>
 		</ion-fab-button>
 	</ion-fab>

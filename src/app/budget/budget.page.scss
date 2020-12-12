@@ -1,6 +1,42 @@
+:host ::ng-deep {
+	.event-detail-container {
+		display: none;
+	}
+	.monthview-selected {
+		background-color: white !important;
+		color: black !important;
+	}
+	.monthview-current {
+		background-color: var(--ion-color-light) !important;
+		color: var(--ion-color-light-contrast) !important;
+	}
+}
+
 .calendar {
 	height: calc(100vh / 7);
 	width: 100%;
+}
+
+.header ion-label,
+.header p {
+	text-align: center;
+	margin: 5px 0px;
+}
+
+.header ion-label {
+	font-size: 13px;
+}
+
+.header p {
+	font-size: 16px;
+}
+
+.earning {
+	color: var(--ion-color-success);
+}
+
+.expense {
+	color: var(--ion-color-danger);
 }
 
 p {
@@ -12,16 +48,7 @@ p {
 	font-size: 14px;
 }
 
-:host ::ng-deep {
-	.event-detail-container {
-		display: none;
-	}
-	.monthview-selected {
-		background-color: white !important;
-		color: black !important;
-	}
-	.monthview-current {
-		background-color: var(--ion-color-primary) !important;
-		color: var(--ion-color-primary-contrast) !important;
-	}
+.entries {
+	font-size: 12px;
+	margin: 5px 0px;
 }

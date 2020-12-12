@@ -9,52 +9,10 @@
 
 <ion-content [fullscreen]="true">
 	<ion-list>
-		<ion-item>
+		<ion-item detail="true" *ngFor="let b of budget" (click)="editEntry(b.id)">
 			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
-			</ion-label>
-		</ion-item>
-		<ion-item>
-			<ion-label>
-				<h2>title</h2>
-				<p>subtitle</p>
+				<h2>{{b.amount}}</h2>
+				<p>{{b.category}}</p>
 			</ion-label>
 		</ion-item>
 	</ion-list>

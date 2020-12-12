@@ -1,9 +1,76 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>edit-budget</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/budget/:date"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Edit Entry</ion-title>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+	<form [formGroup]="form">
+		<ion-list class="ion-padding">
+			<ion-item lines="inset">
+				<ion-label>Type</ion-label>
+				<ion-select interface="action-sheet" formControlName="type" #type>
+					<ion-select-option value="Earning">Earning</ion-select-option>
+					<ion-select-option value="Expense">Expense</ion-select-option>
+				</ion-select>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Amount</ion-label>
+				<ion-input
+					type="number"
+					inputMode="numeric"
+					formControlName="amount"
+				></ion-input>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Date</ion-label>
+				<ion-datetime
+					displayFormat="MM/DD/YYYY"
+					formControlName="date"
+				></ion-datetime>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Category</ion-label>
+				<ion-select
+					*ngIf="type.value === 'Expense' else elseBlock"
+					interface="action-sheet"
+					formControlName="category"
+				>
+					<ion-select-option value="Food">Food</ion-select-option>
+					<ion-select-option value="Transport">Transport</ion-select-option>
+					<ion-select-option value="Apparel">Apparel</ion-select-option>
+					<ion-select-option value="Education">Education</ion-select-option>
+					<ion-select-option value="Health">Health</ion-select-option>
+					<ion-select-option value="Others">Others</ion-select-option>
+				</ion-select>
 
+				<ng-template #elseBlock>
+					<ion-select interface="action-sheet" formControlName="category">
+						<ion-select-option value="Salary">Salary</ion-select-option>
+						<ion-select-option value="Cash">Cash</ion-select-option>
+						<ion-select-option value="Others">Others</ion-select-option>
+					</ion-select>
+				</ng-template>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Note</ion-label>
+				<ion-input
+					type="text"
+					inputmode="text"
+					formControlName="note"
+				></ion-input>
+			</ion-item>
+		</ion-list>
+	</form>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+	<ion-toolbar>
+		<ion-button expand="block" [disabled]="!form.valid" (click)="onUpdate()"
+			>Save</ion-button
+		>
+	</ion-toolbar>
+</ion-footer>

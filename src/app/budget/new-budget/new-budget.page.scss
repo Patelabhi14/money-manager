@@ -1,0 +1,25 @@
+ion-list ion-item {
+	--padding-top: 12px;
+	--padding-bottom: 12px;
+}
+
+ion-input {
+	--padding-start: 16px;
+}
+
+ion-footer {
+	height: 70px;
+
+	ion-toolbar {
+		height: 100%;
+		--padding-start: 16px;
+		--padding-end: 16px;
+
+		ion-button {
+			height: 50px;
+			text-transform: capitalize;
+			font-size: 16px;
+			font-weight: 300;
+		}
+	}
+}
