@@ -3,25 +3,25 @@
 		<ion-title> Money Manager </ion-title>
 	</ion-toolbar>
 
-	<ion-item lines="none">
+	<ion-item lines="none" (click)="onAnalysis()">
 		<ion-grid>
 			<ion-row>
 				<ion-col>
 					<div class="header earning">
 						<ion-label> Earning </ion-label>
-						<p>{{earning}}</p>
+						<p>{{earning | currency:'INR'}}</p>
 					</div>
 				</ion-col>
 				<ion-col>
 					<div class="header expense">
 						<ion-label> Expense </ion-label>
-						<p>{{expense}}</p>
+						<p>{{expense | currency:'INR'}}</p>
 					</div>
 				</ion-col>
 				<ion-col>
 					<div class="header">
 						<ion-label> Total </ion-label>
-						<p>{{total}}</p>
+						<p>{{total | currency:'INR'}}</p>
 					</div>
 				</ion-col>
 			</ion-row>
@@ -31,7 +31,10 @@
 
 <ion-content [fullscreen]="true">
 	<ng-template #template let-view="view" let-row="row" let-col="col">
-		<div class="calendar" (click)="onDateSelect(view.dates[row*7+col])">
+		<div
+			class="calendar"
+			(click)=" view.dates[row*7+col].date.toISOString().slice(0,10) <= calendar.currentDate.toISOString().slice(0,10) && onDateSelect(view.dates[row*7+col])"
+		>
 			<p class="date">{{view.dates[row*7+col].label}}</p>
 			<div *ngFor="let e of entries">
 				<p
@@ -54,8 +57,16 @@
 	</calendar>
 
 	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-		<ion-fab-button color="dark" (click)="createNewBudget()">
-			<ion-icon name="add"></ion-icon>
+		<ion-fab-button color="dark">
+			<ion-icon name="chevron-up-outline"></ion-icon>
 		</ion-fab-button>
+		<ion-fab-list side="top">
+			<ion-fab-button color="dark" (click)="createNewBudget()">
+				<ion-icon name="add"></ion-icon>
+			</ion-fab-button>
+			<ion-fab-button color="dark" (click)="createNewSplitBill()">
+				<ion-icon name="reader-outline"></ion-icon>
+			</ion-fab-button>
+		</ion-fab-list>
 	</ion-fab>
 </ion-content>

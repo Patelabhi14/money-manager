@@ -1,0 +1,13 @@
+ion-list ion-item {
+	--inner-padding-top: 12px;
+	--inner-padding-bottom: 12px;
+
+	ion-label {
+		margin: 0px;
+		text-transform: capitalize;
+
+		h3 {
+			font-weight: 600;
+		}
+	}
+}

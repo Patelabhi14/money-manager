@@ -1,0 +1,33 @@
+ion-list ion-item {
+	--inner-padding-top: 5px;
+	--inner-padding-bottom: 5px;
+
+	ion-label {
+		margin: 0px;
+		text-transform: capitalize;
+
+		h3 {
+			font-weight: 600;
+		}
+
+		p {
+			font-weight: 400;
+			font-size: 14px;
+		}
+	}
+}
+
+.people {
+	padding-top: 50px;
+}
+
+.btn {
+	padding-top: 30px;
+}
+
+ion-button {
+	height: 50px;
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 300;
+}

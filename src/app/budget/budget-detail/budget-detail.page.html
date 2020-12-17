@@ -11,7 +11,7 @@
 	<ion-list>
 		<ion-item detail="true" *ngFor="let b of budget" (click)="editEntry(b.id)">
 			<ion-label>
-				<h2>{{b.amount}}</h2>
+				<h2>{{b.amount | currency:'INR'}}</h2>
 				<p>{{b.category}}</p>
 			</ion-label>
 		</ion-item>

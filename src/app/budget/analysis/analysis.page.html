@@ -1,0 +1,14 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/budget"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Analysis</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<div class="ion-padding chart-container">
+		<canvas id="doughnutCanvas"></canvas>
+	</div>
+</ion-content>

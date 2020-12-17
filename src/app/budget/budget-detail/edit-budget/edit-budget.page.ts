@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 import { BudgetService } from '../../budget.service';
 
@@ -18,7 +18,8 @@ export class EditBudgetPage implements OnInit {
 	constructor(
 		private budgetService: BudgetService,
 		private route: ActivatedRoute,
-		private navCtrl: NavController
+		private navCtrl: NavController,
+		private toastCtrl: ToastController
 	) {}
 
 	ngOnInit() {
@@ -35,7 +36,7 @@ export class EditBudgetPage implements OnInit {
 					}),
 					amount: new FormControl(entry.amount, {
 						updateOn: 'change',
-						validators: [Validators.required],
+						validators: [Validators.required, Validators.min(0)],
 					}),
 					date: new FormControl(entry.date.toISOString(), {
 						updateOn: 'change',
@@ -54,17 +55,25 @@ export class EditBudgetPage implements OnInit {
 	}
 
 	onUpdate() {
-		this.budgetService
-			.updateEntry(
-				this.entryId,
-				this.form.value.type,
-				this.form.value.amount,
-				this.form.value.date,
-				this.form.value.category,
-				this.form.value.note
-			)
-			.subscribe(() => {
-				this.navCtrl.navigateBack(['/budget']);
+		this.toastCtrl
+			.create({
+				message: 'Entry updated successfully.',
+				duration: 2000,
+			})
+			.then((toastEl) => {
+				this.budgetService
+					.updateEntry(
+						this.entryId,
+						this.form.value.type,
+						this.form.value.amount,
+						this.form.value.date,
+						this.form.value.category,
+						this.form.value.note
+					)
+					.subscribe(() => {
+						toastEl.present();
+						this.navCtrl.navigateBack(['/budget']);
+					});
 			});
 	}
 }

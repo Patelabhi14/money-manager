@@ -35,7 +35,6 @@ export class BudgetPage implements OnInit {
 		});
 		this.budgetService.getAllEntries().subscribe((entries) => {
 			this.entries = entries;
-			console.log(this.entries);
 		});
 	}
 
@@ -51,5 +50,13 @@ export class BudgetPage implements OnInit {
 			relativeTo: this.route,
 			queryParams: { date: this.calendar.currentDate.toISOString() },
 		});
+	}
+
+	onAnalysis() {
+		this.navCtrl.navigateForward(['analysis'], { relativeTo: this.route });
+	}
+
+	createNewSplitBill() {
+		this.navCtrl.navigateForward(['splitbill'], { relativeTo: this.route });
 	}
 }

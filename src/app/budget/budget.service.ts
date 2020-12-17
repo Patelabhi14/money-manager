@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 import * as uuid from 'uuid';
 
@@ -12,15 +12,34 @@ import { Entry } from './budget.model';
 export class BudgetService {
 	private _budget = new BehaviorSubject<Entry[]>([
 		new Entry(uuid.v4(), 'Earning', 789, new Date(), 'Cash', ''),
+		new Entry(uuid.v4(), 'Earning', 1000, new Date('12/9/2020'), 'Cash', ''),
 		new Entry(
 			uuid.v4(),
 			'Earning',
-			865,
+			15000,
 			new Date('12/11/2020'),
 			'Salary',
 			'nothing'
 		),
 		new Entry(uuid.v4(), 'Expense', 454, new Date('12/10/2020'), 'Others', ''),
+		new Entry(uuid.v4(), 'Expense', 100, new Date('12/1/2020'), 'Food', ''),
+		new Entry(uuid.v4(), 'Expense', 60, new Date('12/1/2020'), 'Others', ''),
+		new Entry(
+			uuid.v4(),
+			'Expense',
+			500,
+			new Date('12/5/2020'),
+			'Transport',
+			''
+		),
+		new Entry(
+			uuid.v4(),
+			'Expense',
+			150,
+			new Date('12/6/2020'),
+			'Transport',
+			''
+		),
 	]);
 
 	get budget() {
@@ -73,7 +92,6 @@ export class BudgetService {
 					category,
 					note
 				);
-				console.log(updatedEntries);
 				this._budget.next(updatedEntries);
 			})
 		);
@@ -122,6 +140,14 @@ export class BudgetService {
 	}
 
 	getAllEntries() {
-		return this.budget.pipe(take(1));
+		return this.budget;
+	}
+
+	getAllExpenseEntries() {
+		return this.budget.pipe(
+			map((entries) => {
+				return entries.filter((e) => e.type === 'Expense');
+			})
+		);
 	}
 }

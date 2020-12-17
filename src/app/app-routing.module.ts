@@ -18,6 +18,20 @@ const routes: Routes = [
 					),
 			},
 			{
+				path: 'analysis',
+				loadChildren: () =>
+					import('./budget/analysis/analysis.module').then(
+						(m) => m.AnalysisPageModule
+					),
+			},
+			{
+				path: 'splitbill',
+				loadChildren: () =>
+					import('.//budget/split-bill/split-bill.module').then(
+						(m) => m.SplitBillPageModule
+					),
+			},
+			{
 				path: ':date',
 				children: [
 					{

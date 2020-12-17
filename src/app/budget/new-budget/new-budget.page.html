@@ -69,7 +69,11 @@
 
 <ion-footer class="ion-no-border">
 	<ion-toolbar>
-		<ion-button expand="block" [disabled]="!form.valid" (click)="onSubmit()"
+		<ion-button
+			color="dark"
+			expand="block"
+			[disabled]="!form.valid"
+			(click)="onSubmit()"
 			>Save</ion-button
 		>
 	</ion-toolbar>

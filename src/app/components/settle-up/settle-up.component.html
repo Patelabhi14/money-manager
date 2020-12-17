@@ -1,0 +1,21 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="onCancel()">
+				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>Settle Up</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-list class="ion-padding">
+		<ion-item *ngFor="let t of settleUpTransactions">
+			<ion-label>
+				<h2>{{ t.from }} need to pay to {{ t.to }}</h2>
+				<p>{{ t.amount | currency: 'INR' }}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

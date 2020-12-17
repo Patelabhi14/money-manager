@@ -1,0 +1,70 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/budget"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Split Bill</ion-title>
+		<ion-buttons slot="end">
+			<ion-button [disabled]="!form.valid" (click)="onAddExpense()">
+				<ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+			</ion-button>
+			<ion-button (click)="onPopOverClick($event)">
+				<ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-list class="ion-padding">
+		<form [formGroup]="form">
+			<ion-item lines="inset">
+				<ion-label>Amount</ion-label>
+				<ion-input
+					type="number"
+					inputMode="numeric"
+					formControlName="amount"
+				></ion-input>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Note</ion-label>
+				<ion-input
+					type="text"
+					inputmode="text"
+					formControlName="note"
+				></ion-input>
+			</ion-item>
+			<ion-item lines="inset">
+				<ion-label>Paid By</ion-label>
+				<ion-select interface="action-sheet" formControlName="paidBy">
+					<ion-select-option
+						value="{{person.name}}"
+						*ngFor="let person of people"
+						>{{person.name}}</ion-select-option
+					>
+				</ion-select>
+			</ion-item>
+		</form>
+		<div class="people">
+			<ion-item *ngFor="let person of people">
+				<ion-label>
+					<ion-row class="ion-align-items-start">
+						<ion-col class="ion-align-self-start">
+							<h2>{{person.name}}</h2>
+							<p>{{person.amountPaid | currency:'INR'}}</p>
+						</ion-col>
+						<ion-col class="ion-align-self-end ion-text-right">
+							<p>Balance {{person.balance | currency:'INR'}}</p>
+						</ion-col>
+					</ion-row>
+				</ion-label>
+			</ion-item>
+		</div>
+	</ion-list>
+
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button color="dark" (click)="addPeople()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+</ion-content>

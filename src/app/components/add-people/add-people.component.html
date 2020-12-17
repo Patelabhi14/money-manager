@@ -1,0 +1,48 @@
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="onCancel()">
+				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>Add People</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="onSubmit()" [disabled]="people.length < 2">
+				<ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<div class="ion-padding">
+		<form [formGroup]="form">
+			<ion-item lines="inset">
+				<ion-label>Name</ion-label>
+				<ion-input
+					type="text"
+					inputmode="text"
+					formControlName="name"
+				></ion-input>
+			</ion-item>
+		</form>
+
+		<div class="ion-text-center ion-padding-vertical">
+			<ion-button
+				fill="outline"
+				(click)="addPeople()"
+				[disabled]="form.value.name === null"
+			>
+				<ion-label>Add</ion-label>
+			</ion-button>
+		</div>
+	</div>
+
+	<ion-list class="ion-padding">
+		<ion-item *ngFor="let p of people">
+			<ion-label
+				><h3>{{ p }}</h3></ion-label
+			>
+		</ion-item>
+	</ion-list>
+</ion-content>
